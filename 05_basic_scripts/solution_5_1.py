@@ -7,32 +7,26 @@ cidr = int(cidrString)
 print(cidr)
 
 print(addString)
-print(type(addString))
 
-cidr = cidr * '1'
-cidr_lost = (32 - cidr) * '0'
-cidr = cidr + cidr_lost
+ip = addString.split('.')
 
-print(cidr)
-oktet=[]
-for i in cidr:
-	cidr[i] += cidr[i]
-	if len(cidr[i]) % 7:
-		oktet[i] = cidr[i]
-		cidr[i-1] = ''
+mask = cidr
+mask_lost = (32 - mask) * '0'
+mask = mask * '1'
+mask = mask + mask_lost
 
-print(oktet)
+mask = [mask[x:x+8] for x in range (0, len(mask) - len(mask) % 8, 8)]
 
 ip_template = """
 Network: 
 {0:8} {1:8} {2:8} {3:8}
-{0:8b} {1:8b} {2:8b} {3:8b}
+{0:08b} {1:08b} {2:08b} {3:08b}
 
 Mask:
-cidrString
-{0:8} {1:8} {2:8} {3:8}
-{0:8b} {1:8b} {2:8b} {3:8b}
+/{cidr}
+{4:8} {5:8} {6:8} {7:8}
+{4:08b} {5:08b} {6:08b} {7:08b}
 """
 
+print(ip_template.format(int(ip[0]),int(ip[1]),int(ip[2]),int(ip[3]),int(mask[0], 2),int(mask[1], 2),int(mask[2], 2), int(mask[3], 2),cidr=cidr))
 
-print(iptemplate.format(addString)
