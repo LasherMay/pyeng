@@ -2,19 +2,16 @@
 
 mode = input('Enter interface mode (access/trunk): ')
 intf = input('Enter interface type and number (e.g. Gi0/1): ')
-vlan = input('Enter vlan(s) to add: ')
+vlans = input('Enter vlan(s) to add: ')
 
 
-access_template = ['switchport mode access',
-'switchport access vlan {}',
-'switchport nonegotiate',
-'spanning-tree portfast',
-'spanning-tree bpduguard enable']
+templates = { 'access_template' : 
+'switchport mode access \nswitchport access vlan {vlans} \nswitchport nonegotiate \nspanning-tree portfast \nspanning-tree bpduguard enable\n',
+'trunk_template' :
+'switchport trunk encapsulation dot1q \nswitchport mode trunk \nswitchport trunk allowed vlan {vlans}'
+}
 
-trunk_template = ['switchport trunk encapsulation dot1q',
-'switchport mode trunk',
-'switchport trunk allowed vlan {}']
 
-print('Interface {}\n'.format(intf))
-choice = {}_template.format(mode)
-print(choice)
+print('\nInterface {}'.format(intf))
+mode = mode + "_template"
+print(templates[mode].format(vlans=vlans))
