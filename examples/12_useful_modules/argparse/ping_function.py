@@ -13,7 +13,7 @@ def ping_ip(ip_address, count):
         shell=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        encoding='utf-8')
+		encoding='utf-8')
     if reply.returncode == 0:
         return True, reply.stdout
     else:
