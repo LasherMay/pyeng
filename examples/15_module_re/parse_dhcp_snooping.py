@@ -2,8 +2,12 @@
 import re
 
 #'00:09:BB:3D:D6:58   10.1.10.2        86250       dhcp-snooping   10    FastEthernet0/1'
+#regex = re.compile(
+#    '(?P<mac>\S+) +(?P<ip>\S+) +\d+ +\S+ +(?P<vlan>\d+) +(?P<port>\S+)')
 regex = re.compile(
-    '(?P<mac>\S+) +(?P<ip>\S+) +\d+ +\S+ +(?P<vlan>\d+) +(?P<port>\S+)')
+'(?P<mac>\S+)\s+(?P<ipaddr>\S+)\s+\d+\s+\S+\s+(?P<vlanid>\d+)\s+(?P<intf>\S+)'
+)
+
 result = []
 
 with open('dhcp_snooping.txt') as data:
